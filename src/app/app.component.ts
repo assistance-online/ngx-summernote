@@ -1,6 +1,17 @@
-import { Component, OnInit } from '@angular/core';
-import { UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
+import { Component, inject, OnInit, viewChild } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
+import { JsonPipe } from '@angular/common';
+import {
+  NgxSummernoteDirective,
+  NgxSummernoteViewDirective,
+} from 'ngx-summernote';
+import {
+  FormsModule,
+  ReactiveFormsModule,
+  UntypedFormControl,
+  UntypedFormGroup,
+  Validators,
+} from '@angular/forms';
 
 declare var $;
 
@@ -8,7 +19,13 @@ declare var $;
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
-  standalone: false
+  imports: [
+    FormsModule,
+    JsonPipe,
+    NgxSummernoteDirective,
+    NgxSummernoteViewDirective,
+    ReactiveFormsModule
+  ],
 })
 export class AppComponent implements OnInit {
   showTemplateForm = false;
@@ -70,17 +87,20 @@ export class AppComponent implements OnInit {
       testBtn: customButton,
     },
     codeviewFilter: true,
-    codeviewFilterRegex: /<\/*(?:applet|b(?:ase|gsound|link)|embed|frame(?:set)?|ilayer|l(?:ayer|ink)|meta|object|s(?:cript|tyle)|t(?:itle|extarea)|xml|.*onmouseover)[^>]*?>/gi,
+    codeviewFilterRegex:
+      /<\/*(?:applet|b(?:ase|gsound|link)|embed|frame(?:set)?|ilayer|l(?:ayer|ink)|meta|object|s(?:cript|tyle)|t(?:itle|extarea)|xml|.*onmouseover)[^>]*?>/gi,
     codeviewIframeFilter: true,
   };
 
   editorDisabled = false;
 
   get sanitizedHtml() {
-    return this.sanitizer.bypassSecurityTrustHtml(this.form.get('html').value);
+    return this._sanitizer.bypassSecurityTrustHtml(this.form.get('html').value);
   }
 
-  constructor(private sanitizer: DomSanitizer) {
+  private readonly _sanitizer = inject(DomSanitizer);
+
+  constructor() {
     this.form = new UntypedFormGroup({
       html: new UntypedFormControl('', Validators.required),
     });
@@ -102,10 +122,6 @@ export class AppComponent implements OnInit {
 
   onDelete(file) {
     console.log('Delete file', file.url);
-  }
-
-  summernoteInit(event) {
-    console.log(event);
   }
 }
 

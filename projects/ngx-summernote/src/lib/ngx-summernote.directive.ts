@@ -21,16 +21,15 @@ import { codeBlockButton } from './code-block.button';
 declare var $;
 
 @Directive({
-  // tslint:disable-next-line:directive-selector
-  selector: '[ngxSummernote]',
-  providers: [
-    {
-      provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => NgxSummernoteDirective),
-      multi: true
-    }
-  ],
-  standalone: false
+    // tslint:disable-next-line:directive-selector
+    selector: '[ngxSummernote]',
+    providers: [
+        {
+            provide: NG_VALUE_ACCESSOR,
+            useExisting: forwardRef(() => NgxSummernoteDirective),
+            multi: true
+        }
+    ]
 })
 export class NgxSummernoteDirective
   implements ControlValueAccessor, OnInit, OnDestroy, OnChanges {
@@ -131,7 +130,7 @@ export class NgxSummernoteDirective
     }
   }
 
-  // Begin ControlValueAccesor methods.
+  // Begin ControlValueAccessor methods.
   onChange = (_: any) => { };
   onTouched = () => { };
 

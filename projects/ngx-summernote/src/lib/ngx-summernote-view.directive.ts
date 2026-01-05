@@ -6,8 +6,7 @@ declare var $;
 
 @Directive({
     // tslint:disable-next-line:directive-selector
-    selector: '[ngxSummernoteView]',
-    standalone: false
+    selector: '[ngxSummernoteView]'
 })
 export class NgxSummernoteViewDirective implements AfterViewInit {
     @Input() set ngxSummernoteView(content: string) {

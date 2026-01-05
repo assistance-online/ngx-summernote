@@ -12,6 +12,7 @@ Compatibility:
 
 Angular | ngx-summernote
 ------- | --------------
+\> 21   | 1.3.0
 \> 19   | 1.1.0
 \> 14   | 1.0.0 (Ivy support)
 \> 14   | 0.9.0
@@ -40,21 +41,21 @@ Add JQuery and Summernote scripts and styles to the angular.json file:
 ]
 ```
 
-Add NgxSummernoteModule to the app.module.ts file OR to the subcomponent module.ts file if using lazy loading:
+Add NgxSummernoteDirective to the component imports:
 
 ```
 ...
-import { NgxSummernoteModule } from 'ngx-summernote';
+import { NgxSummernoteDirective } from 'ngx-summernote';
 ...
-@NgModule({
+@Component({
 ...
   imports: [
     ...
-    NgxSummernoteModule
+    NgxSummernoteDirective
     ...
   ]
 })
-export class AppModule { }
+export class AppComponent { }
 ```
 
 Use `[ngxSummernote]` directive on an element to init Summernote editor:
@@ -187,3 +188,4 @@ npm start
 - [Tim Börner](https://github.com/tim-boerner)
 - [Jason K.](https://github.com/lonerzzz)
 - [Elle](https://github.com/LuigiElleBalotta)
+- [Niels Witte](https://github.com/nielswitte)
